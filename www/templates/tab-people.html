@@ -1,0 +1,47 @@
+<ion-view view-title="People">
+
+     <div ng-controller="PeopleCtrl">           
+        <ion-content>
+        <div class="list card">
+            <div class="item item-icon-left"> <i class="icon ion-android-person"></i> Blood:
+                <b> {{ data.clientSide }} {{ data.serverSide }}</b>
+            </div>
+         </div>
+      
+        <div class="list card">
+        <div class="item item-divider"> 
+          Type: 
+        </div>
+        <div class="row">
+                
+        <ion-radio ng-repeat="item in clientSideList"
+                   ng-value="item.value"
+                   ng-model="data.clientSide">
+          {{ item.text }}
+        </ion-radio>
+        </div>
+        </div>
+
+
+       <div class="list card">
+        <div class="item item-divider">
+          Rh: {{}}
+        </div>
+           
+        <div class="row">
+        <ion-radio ng-repeat="item in serverSideList"
+                   ng-value="item.value"
+                   ng-model="data.serverSide"
+                   ng-change="serverSideChange(item)"
+                   name="server-side">
+          {{ item.text }}
+        </ion-radio>
+        </div>
+      </div>
+    
+              
+    </ion-content>
+  </div> <!--End PeopleCtrl-->
+   
+
+</ion-view>
