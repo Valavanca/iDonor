@@ -4,19 +4,19 @@
         <ion-content>
         <div class="list card">
             <div class="item item-icon-left"> <i class="icon ion-android-person"></i> Blood:
-                <b> {{ data.clientSide }} {{ data.serverSide }}</b>
+                <b> {{ data.Type }} {{ data.Rh }}</b>
             </div>
          </div>
       
         <div class="list card">
         <div class="item item-divider"> 
-          Type: 
+          Group: 
         </div>
         <div class="row">
                 
-        <ion-radio ng-repeat="item in clientSideList"
+        <ion-radio ng-repeat="item in TypeList"
                    ng-value="item.value"
-                   ng-model="data.clientSide">
+                   ng-model="data.Type">
           {{ item.text }}
         </ion-radio>
         </div>
@@ -25,22 +25,35 @@
 
        <div class="list card">
         <div class="item item-divider">
-          Rh: {{}}
+          Rh:
         </div>
            
         <div class="row">
-        <ion-radio ng-repeat="item in serverSideList"
+        <ion-radio ng-repeat="item in RhList"
                    ng-value="item.value"
-                   ng-model="data.serverSide"
-                   ng-change="serverSideChange(item)"
-                   name="server-side">
+                   ng-model="data.Rh"
+                   ng-change="RhChange(item)"
+                   name="Rh">
           {{ item.text }}
         </ion-radio>
         </div>
-      </div>
-    
-              
+      </div>        
     </ion-content>
+    <!--/////// People ////// -->
+
+        <ion-list>
+            <ion-item ng-repeat="itm in tempGroupList " type="item-text-wrap">
+                <div style="display:inline-block;vertical-align:top;">
+                    {{itm.name}} {{itm.surname}}
+                    <p>{{itm.address}}</p>
+                    <p>{{itm.number}}</p>
+                </div>
+                 <button class="button button-positive" style="float:right" ng-click="call(itm.mobno)">
+                    <i class="icon ion-android-call"></i> </button>
+            </ion-item>
+        </ion-list>
+
+
   </div> <!--End PeopleCtrl-->
    
 
