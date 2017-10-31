@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'pascalprecht.translate'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -18,16 +18,29 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       // org.apache.cordova.statusbar required
       StatusBar.styleLightContent();
     }
+
+    if(typeof navigator.globalization !== "undefined") {
+        navigator.globalization.getPreferredLanguage(function(language) {
+            $translate.use((language.value).split("-")[0]).then(function(data) {
+                console.log("SUCCESS -> " + data);
+            }, function(error) {
+                console.log("ERROR -> " + error);
+            });
+        }, null);
+    }
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $translateProvider) {
 
-  // Ionic uses AngularUI Router which uses the concept of states
-  // Learn more here: https://github.com/angular-ui/ui-router
-  // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
+
+    .state('login', {
+      url: '/login',
+      templateUrl: 'templates/login.html',
+      controller: 'LoginCtrl'
+  })
 
   // setup an abstract state for the tabs directive
     .state('tab', {
@@ -67,6 +80,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     })
 
+    .state('tab.people', {
+        url: '/people',
+          views: {
+              'tab-people': {
+                  templateUrl: 'templates/tab-people.html',
+                  controller: 'PeopleCtrl'
+              }
+          }
+      })
+
   .state('tab.account', {
     url: '/account',
     views: {
@@ -78,6 +101,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/login');
 
+   $translateProvider.useStaticFilesLoader({
+    prefix: '/js/i18n/locale_',
+    suffix: '.json'
+  });
+
+  $translateProvider.preferredLanguage("es");
+  $translateProvider.fallbackLanguage("en");
+  $translateProvider.useSanitizeValueStrategy('escaped');
+  //$translateProvider.useLocalStorage();
 });

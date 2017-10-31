@@ -1,0 +1,22 @@
+<ion-view  name="login-view">
+  <ion-content class="padding">
+      <div class="list list-inset">
+
+          <label class="logo padding">
+            <img src="img/logo.png">
+
+          </label>
+
+          <label class="item item-input">
+              <input type="text" placeholder='{{"Username" | translate}}' ng-model="data.username">
+          </label>
+          <label class="item item-input">
+              <input type="password" placeholder='{{"Password" | translate}}' ng-model="data.password">
+          </label>
+      </div>
+      <button class="button button-block button-positive" ng-click="login()">{{"Login" | translate}}</button>
+      <button class="button button-block button-clear button-stable">
+        {{"forgot_password" | translate}}
+      </button>
+  </ion-content>
+</ion-view>

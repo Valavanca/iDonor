@@ -1,0 +1,66 @@
+<ion-view view-title="People">
+
+     <div ng-controller="PeopleCtrl">           
+        <ion-content>
+        <div class="list card">
+            <div class="item item-icon-left"> <i class="icon ion-android-person"></i> Blood:
+                <b> {{ data.Type }} {{ data.Rh }}</b>
+            </div>
+         </div>
+      
+        <div class="list card">
+        <div class="item item-divider"> 
+          Group: 
+        </div>
+        <div class="row">
+                
+        <ion-radio ng-repeat="item in TypeList"
+                   ng-value="item.value"
+                   ng-model="data.Type"
+                   ng-change="TypeChange(item)"
+                   name="Type">
+          {{ item.text }}
+        </ion-radio>
+        </div>
+        </div>
+
+
+       <div class="list card">
+        <div class="item item-divider">
+          Rh:
+        </div>
+           
+        <div class="row">
+        <ion-radio ng-repeat="item in RhList"
+                   ng-value="item.value"
+                   ng-model="data.Rh"
+                   ng-change="RhChange(item)"
+                   name="Rh">
+          {{ item.text }}
+        </ion-radio>
+        </div>
+      </div>  
+      <!--/////// People ////// -->
+    <!--<ion-scroll zooming="true" direction="xy" style="width: 100%; height: 600px">-->
+        <ion-list>
+            <ion-item ng-repeat="itm in tempGroupList " type="item-text-wrap">
+                <div style="display:inline-block;vertical-align:top;">
+                    <p>{{itm.name}} {{itm.surname}}  [<b>{{itm.group}} {{itm.rh}}</b>]</p>
+                    <p>{{itm.address}}</p>
+                    <p>{{itm.number}}</p>                    
+                </div>
+                 <button class="button button-positive" style="float:right" ng-click="call(itm.number)">
+                    <i class="icon ion-android-call"></i> </button>
+            </ion-item>
+        </ion-list>
+    <!--</ion-scroll>   -->    
+            
+            
+                  
+    </ion-content>
+   
+
+  </div> <!--End PeopleCtrl-->
+   
+
+</ion-view>
